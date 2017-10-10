@@ -45,7 +45,7 @@ function sliceImage(sInPath, sOutPath, nZ) {
 function resizeImage(sPath, sFileName, oParams) {
   if (path.extname(file) === jpgExt && !/__\d+.jpg/.test(file)) {
     const nZoomLevel = oParams.nZ;
-    const nImgSize = nTileSize * nZoomLevel;
+    const nImgSize = nTileSize * (1+nZoomLevel);
     const sSrcPath = path.join(sPath, file);
     const fileName = path.basename(file, jpgExt);
     console.log("Resize \""+sSrcPath+"\"");
