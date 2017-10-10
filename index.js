@@ -53,10 +53,12 @@ function resizeImage(sPath, sFileName, oParams) {
 
     const sNewPath = path.join(sPath, path.parse(file).dir, fileName+"__"+nImgSize+".jpg");
      // console.log("Try to convert into \""+sNewPath+"\"");
-
-    cp.exec(`magick "${sSrcPath}" -resize ${nImgSize} "${sNewPath}"`)
-
-
+    try{
+      cp.execSync(`magick "${sSrcPath}" -resize ${nImgSize} "${sNewPath}"`);
+    } catch (err) {
+      console.dir(err);
+    }
+    return sNewPath;
   }
 }
 
@@ -64,9 +66,13 @@ function loopImages() {
   var aZ = [0,1,2,3,4,5,6,7];
 
   aZ.forEach(function(nZoom){
-    resizeImage(sPath, sFileName, {nZ: nZoom});
-    sliceImage(sInPath, sOutPath, nZoom);
-    // when resizeImage than  sliceImage
+
+    var sPath = resizeImage(sPath, sFileName, {nZ: nZoom});
+    if(sPath) {
+      sliceImage(sPath, sOutPath, nZoom);
+    } else {
+      console.log("Can't prepare source image.");
+    }
   });
 
 }
