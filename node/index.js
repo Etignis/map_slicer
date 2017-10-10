@@ -6,8 +6,8 @@ const mapslice = require('mapslice');
 const gm = require('gm').subClass({imageMagick: true});
 const cp = require('child_process');
 
-const sPathToSrc = '../source/map.jpg'; // fix
-const sPathToOut = 'map/{z}/{y}_{x}.png'; // fix
+const sPathToSrc = '../source/map.jpg';
+const sPathToOut = '../map/{z}/{y}_{x}.png';
 const nTileSize = 256;
 
 function sliceImage(sInPath, sOutPath, nZ) {
@@ -15,11 +15,11 @@ function sliceImage(sInPath, sOutPath, nZ) {
   var mapSlicer = mapslice({
       file: sInPath,                     // (required) Huge image to slice
       output: sOutPath,                  // Output file pattern
+      imageMagick: true,
       background: "rgba(255,255,255,0)", // (default: '#FFFFFFFF') Background color to be used for the tiles. More: http://ow.ly/rsluD
       minWidth: 200,                     // See explanation about Size detection below
       skipEmptyTiles: true,              // Skips all the empty tiles
       bitdepth: 8,                       // (optional) See http://aheckmann.github.io/gm/docs.html#dither
-      dither: true,                      // (optional) See http://aheckmann.github.io/gm/docs.html#bitdepth
       colors: 128,                       // (optional) See http://aheckmann.github.io/gm/docs.html#colors
   });
 
