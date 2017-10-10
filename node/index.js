@@ -6,7 +6,7 @@ const mapslice = require('mapslice');
 const gm = require('gm').subClass({imageMagick: true});
 const cp = require('child_process');
 
-const sPathToSrc = 'myImage.jpg'; // fix
+const sPathToSrc = '../source/map.jpg'; // fix
 const sPathToOut = 'map/{z}/{y}_{x}.png'; // fix
 const nTileSize = 256;
 
@@ -78,3 +78,4 @@ function loopImages() {
 }
 
 
+sliceImage(sPathToSrc, sPathToOut, 0);
