@@ -170,19 +170,19 @@
       //var oMarker = L.marker().bindPopup();
       var aMarkers = [], sIco, oParams, oMarker;
       oData[key].list.forEach(function(item) {        
-          if(item.coord.length == 2){
-            sIco = oData[key].ico;
-            oParams = sIco? {icon: oMarkers[sIco]} : {};
-            oMarker = L.marker(translateCoord(item.coord), oParams).bindPopup(item.popup);
-            // oMarker.on('click', function(e) {
-              /*e.target.setIcon(selectedIcon);
-              document.getElementById('someDiv').innerHTML = points[e.target.options.id][2];*/
-              //debugger;
-            // }); 
-            aMarkers.push(oMarker);
-          } else {
-            aMarkers.push(L.polygon(translateCoord(item.coord), {color: item.color}).bindPopup(item.popup));
-          }        
+				if(item.coord.length == 2){
+					sIco = oData[key].ico;
+					oParams = sIco? {icon: oMarkers[sIco]} : {};
+					oMarker = L.marker(translateCoord(item.coord), oParams).bindPopup(item.popup);
+					// oMarker.on('click', function(e) {
+						/*e.target.setIcon(selectedIcon);
+						document.getElementById('someDiv').innerHTML = points[e.target.options.id][2];*/
+						//debugger;
+					// }); 
+					aMarkers.push(oMarker);
+				} else {
+					aMarkers.push(L.polygon(translateCoord(item.coord), {color: item.color}).bindPopup(item.popup));
+				}        
       });
       oMapData[oData[key].title] = L.layerGroup(aMarkers); 
     }
